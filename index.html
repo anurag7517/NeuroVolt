@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroVolt — The Intelligence Layer for Every Watt</title>
+<meta name="description" content="NeuroVolt is an AI-powered electricity intelligence platform that analyzes appliance usage, detects wastage, predicts bills and recommends savings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div class="grid-texture" aria-hidden="true"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav">
+  <div class="nav__brand">
+    <span class="nav__logo">⚡ NEUROVOLT</span>
+    <span class="nav__sublabel">ENERGY INTELLIGENCE SYSTEM</span>
+  </div>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#overview">OVERVIEW</a>
+    <a href="#energy">ENERGY</a>
+    <a href="#appliances">APPLIANCES</a>
+    <a href="#ai-insights">AI INSIGHTS</a>
+    <a href="#what-if-simulator">SIMULATOR</a>
+  </nav>
+
+
+<div class="telemetry__item">
+      <span class="telemetry__live"><span class="status-dot status-dot--sm"></span> LIVE</span>
+      <span class="telemetry__label">CURRENT CONSUMPTION</span>
+      <span class="telemetry__value" id="current-consumption">2.84 <small>kW</small></span>
+    </div>
+
+  <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="overview">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero__left">
+      <p class="eyebrow">NEUROVOLT / ENERGY INTELLIGENCE</p>
+      <h1 id="hero-heading" class="hero__heading">EVERY WATT<br>HAS A STORY.</h1>
+      <p class="hero__body">NeuroVolt transforms everyday electricity usage into intelligent, actionable energy decisions.</p>
+      <div class="hero__cta-row">
+        <a href="#appliances" class="btn btn--primary">START ENERGY ANALYSIS <span aria-hidden="true">→</span></a>
+        <a href="#ai-insights" class="btn btn--ghost">EXPLORE AI INSIGHTS</a>
+      </div>
+    </div>
+
+    <div class="hero__right">
+      <div class="orbit" id="energy-score" role="img" aria-label="Energy efficiency score 78 out of 100, current load 248 kilowatt hours, potential savings 426 rupees, status optimized">
+        <div class="orbit__ring orbit__ring--outer"></div>
+        <div class="orbit__ring orbit__ring--mid"></div>
+        <div class="orbit__ring orbit__ring--inner"></div>
+        <div class="orbit__scan" aria-hidden="true"></div>
+
+        <div class="orbit__core">
+          <span class="orbit__number">78</span>
+          <span class="orbit__label">ENERGY<br>EFFICIENCY</span>
+        </div>
+
+        <div class="orbit__tag orbit__tag--load">
+          <span class="orbit__tag-label">CURRENT LOAD</span>
+          <span class="orbit__tag-value">248 kWh</span>
+        </div>
+        <div class="orbit__tag orbit__tag--save">
+          <span class="orbit__tag-label">POTENTIAL SAVE</span>
+          <span class="orbit__tag-value">₹426</span>
+        </div>
+        <div class="orbit__tag orbit__tag--status">
+          <span class="orbit__tag-label">STATUS</span>
+          <span class="orbit__tag-value orbit__tag-value--accent">OPTIMIZED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE ENERGY STRIP ============ -->
+  <section class="telemetry" id="monthly-consumption" aria-label="Live energy telemetry">
+       <div class="telemetry__item">
+      <span class="telemetry__label">THIS MONTH</span>
+      <span class="telemetry__value" id="monthly-consumption-value">248 <small>kWh</small></span>
+    </div>
+    <div class="telemetry__divider" aria-hidden="true"></div>
+    <div class="telemetry__item" id="estimated-bill">
+      <span class="telemetry__label">EST. BILL</span>
+      <span class="telemetry__value">₹1,842</span>
+    </div>
+    <div class="telemetry__divider" aria-hidden="true"></div>
+    <div class="telemetry__item" id="potential-savings">
+      <span class="telemetry__label">SAVINGS POTENTIAL</span>
+      <span class="telemetry__value telemetry__value--accent">₹426</span>
+    </div>
+    <div class="telemetry__divider" aria-hidden="true"></div>
+    <div class="telemetry__item">
+      <span class="telemetry__label">TOTAL APPLIANCES</span>
+      <span class="telemetry__value" id="total-appliances-value">0</span>
+    </div>
+    <div class="telemetry__divider" aria-hidden="true"></div>
+    <div class="telemetry__item">
+      <span class="telemetry__label">HIGHEST CONSUMER</span>
+      <span class="telemetry__value telemetry__value--accent" id="highest-consumer-value">—</span>
+    </div>
+  </section>
+
+  <!-- ============ ENERGY FLOW ============ -->
+  <section class="section" id="energy" aria-labelledby="flow-heading">
+    <div class="section__head">
+      <p class="eyebrow">ENERGY FLOW / LIVE DISTRIBUTION</p>
+      <h2 id="flow-heading" class="section__heading">FOLLOW THE ENERGY</h2>
+      <p class="section__sub">See where electricity moves inside your home.</p>
+    </div>
+
+    <div class="flow" id="energy-flow">
+      <ol class="flow__stages">
+        <li class="flow__stage"><span>GRID</span></li>
+        <li class="flow__connector" aria-hidden="true"><span class="flow__pulse"></span></li>
+        <li class="flow__stage"><span>HOME</span></li>
+        <li class="flow__connector" aria-hidden="true"><span class="flow__pulse"></span></li>
+        <li class="flow__stage"><span>APPLIANCES</span></li>
+        <li class="flow__connector" aria-hidden="true"><span class="flow__pulse"></span></li>
+        <li class="flow__stage"><span>AI ANALYSIS</span></li>
+        <li class="flow__connector" aria-hidden="true"><span class="flow__pulse"></span></li>
+        <li class="flow__stage flow__stage--accent"><span>SAVINGS</span></li>
+      </ol>
+
+      <div class="flow__nodes">
+        <div class="flow__node">
+          <span class="flow__node-name">AC</span>
+          <span class="flow__node-power">1.50 kW</span>
+          <div class="flow__node-bar"><span style="width:38%"></span></div>
+          <span class="flow__node-pct">38%</span>
+        </div>
+        <div class="flow__node">
+          <span class="flow__node-name">REFRIGERATOR</span>
+          <span class="flow__node-power">0.20 kW</span>
+          <div class="flow__node-bar"><span style="width:22%"></span></div>
+          <span class="flow__node-pct">22%</span>
+        </div>
+        <div class="flow__node">
+          <span class="flow__node-name">FANS</span>
+          <span class="flow__node-power">0.30 kW</span>
+          <div class="flow__node-bar"><span style="width:14%"></span></div>
+          <span class="flow__node-pct">14%</span>
+        </div>
+        <div class="flow__node">
+          <span class="flow__node-name">LIGHTING</span>
+          <span class="flow__node-power">0.18 kW</span>
+          <div class="flow__node-bar"><span style="width:10%"></span></div>
+          <span class="flow__node-pct">10%</span>
+        </div>
+        <div class="flow__node">
+          <span class="flow__node-name">TV</span>
+          <span class="flow__node-power">0.15 kW</span>
+          <div class="flow__node-bar"><span style="width:9%"></span></div>
+          <span class="flow__node-pct">9%</span>
+        </div>
+        <div class="flow__node">
+          <span class="flow__node-name">OTHER</span>
+          <span class="flow__node-power">0.12 kW</span>
+          <div class="flow__node-bar"><span style="width:7%"></span></div>
+          <span class="flow__node-pct">7%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLIANCE INTELLIGENCE ============ -->
+  <section class="section" id="appliances" aria-labelledby="appliance-heading">
+    <div class="section__head">
+      <p class="eyebrow">APPLIANCE INTELLIGENCE / COMMAND VIEW</p>
+      <h2 id="appliance-heading" class="section__heading">APPLIANCE INTELLIGENCE</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table" id="appliance-list">
+        <thead>
+          <tr>
+            <th scope="col">APPLIANCE</th>
+            <th scope="col">POWER</th>
+            <th scope="col">DAILY USE</th>
+            <th scope="col">MONTHLY kWh</th>
+            <th scope="col">COST</th>
+            <th scope="col">EFFICIENCY</th>
+            <th scope="col">STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Appliance">AIR CONDITIONER</td>
+            <td data-label="Power">1500 W</td>
+            <td data-label="Daily use">6.0 h/day</td>
+            <td data-label="Monthly kWh">270 kWh</td>
+            <td data-label="Cost">₹2,160</td>
+            <td data-label="Efficiency"><div class="eff-bar"><span style="width:62%"></span></div><span class="eff-num">62%</span></td>
+            <td data-label="Status"><span class="pill pill--high">HIGH</span></td>
+          </tr>
+          <tr>
+            <td data-label="Appliance">REFRIGERATOR</td>
+            <td data-label="Power">200 W</td>
+            <td data-label="Daily use">24 h/day</td>
+            <td data-label="Monthly kWh">144 kWh</td>
+            <td data-label="Cost">₹1,152</td>
+            <td data-label="Efficiency"><div class="eff-bar"><span style="width:84%"></span></div><span class="eff-num">84%</span></td>
+            <td data-label="Status"><span class="pill pill--normal">NORMAL</span></td>
+          </tr>
+          <tr>
+            <td data-label="Appliance">FAN</td>
+            <td data-label="Power">75 W</td>
+            <td data-label="Daily use">20 h/day</td>
+            <td data-label="Monthly kWh">45 kWh</td>
+            <td data-label="Cost">₹360</td>
+            <td data-label="Efficiency"><div class="eff-bar"><span style="width:91%"></span></div><span class="eff-num">91%</span></td>
+            <td data-label="Status"><span class="pill pill--efficient">EFFICIENT</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ CONSUMPTION ANALYTICS ============ -->
+  <section class="section" id="analytics" aria-labelledby="analytics-heading">
+    <div class="section__head">
+      <p class="eyebrow">CONSUMPTION ANALYTICS / VISUAL BREAKDOWN</p>
+      <h2 id="analytics-heading" class="section__heading">ENERGY BY THE NUMBERS</h2>
+    </div>
+
+    <div class="analytics-grid">
+      <div class="analytics-panel glass">
+        <div class="analytics-panel__head">
+          <span class="analytics-panel__title">MONTHLY CONSUMPTION BY APPLIANCE</span>
+        </div>
+        <div class="analytics-panel__body">
+          <canvas id="appliance-chart"></canvas>
+          <p id="appliance-chart-empty" class="analytics-empty" hidden>No appliance data available yet.</p>
+        </div>
+      </div>
+
+      <div class="analytics-panel glass">
+        <div class="analytics-panel__head">
+          <span class="analytics-panel__title">DAILY VS MONTHLY CONSUMPTION</span>
+        </div>
+        <div class="analytics-panel__body">
+          <canvas id="energy-comparison-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AI CORE ============ -->
+  <section class="ai-core" id="ai-insights" aria-labelledby="ai-heading">
+    <div class="ai-core__scanline" aria-hidden="true"></div>
+    <div class="section__head">
+      <p class="eyebrow">NEUROVOLT AI CORE</p>
+      <h2 id="ai-heading" class="section__heading">NEUROVOLT<br>AI CORE</h2>
+      <p class="ai-core__status"><span class="status-dot status-dot--sm"></span> ANALYZING YOUR ENERGY PATTERN</p>
+    </div>
+
+    <div class="ai-core__panel" id="ai-insights-panel">
+      <p class="ai-core__headline">WE FOUND 3 SAVING OPPORTUNITIES.</p>
+
+      <ol class="ai-core__list">
+        <li class="ai-core__item">
+          <span class="ai-core__index">01</span>
+          <div class="ai-core__content">
+            <span class="ai-core__target">AIR CONDITIONER</span>
+            <span class="ai-core__action">Reduce runtime by 1 hour/day</span>
+          </div>
+          <div class="ai-core__potential">
+            <span class="ai-core__potential-label">POTENTIAL</span>
+            <span class="ai-core__potential-value">₹180 <small>/ MONTH</small></span>
+          </div>
+        </li>
+        <li class="ai-core__item">
+          <span class="ai-core__index">02</span>
+          <div class="ai-core__content">
+            <span class="ai-core__target">LIGHTING</span>
+            <span class="ai-core__action">Replace high-consumption bulbs</span>
+          </div>
+          <div class="ai-core__potential">
+            <span class="ai-core__potential-label">POTENTIAL</span>
+            <span class="ai-core__potential-value">₹95 <small>/ MONTH</small></span>
+          </div>
+        </li>
+        <li class="ai-core__item">
+          <span class="ai-core__index">03</span>
+          <div class="ai-core__content">
+            <span class="ai-core__target">STANDBY DEVICES</span>
+            <span class="ai-core__action">Reduce idle consumption</span>
+          </div>
+          <div class="ai-core__potential">
+            <span class="ai-core__potential-label">POTENTIAL</span>
+            <span class="ai-core__potential-value">₹70 <small>/ MONTH</small></span>
+          </div>
+        </li>
+      </ol>
+
+      <button class="btn btn--primary btn--wide" type="button">OPTIMIZE MY ENERGY <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <!-- ============ ENERGY SCORE ============ -->
+  <section class="section section--center" aria-labelledby="score-heading">
+    <div class="section__head">
+      <p class="eyebrow">SYSTEM DIAGNOSTIC</p>
+      <h2 id="score-heading" class="section__heading">HOW SMART IS YOUR ENERGY?</h2>
+    </div>
+
+    <div class="score-panel">
+      <div class="score-ring" role="img" aria-label="Energy efficiency score 78 out of 100">
+        <svg viewBox="0 0 200 200" class="score-ring__svg" aria-hidden="true">
+          <circle cx="100" cy="100" r="88" class="score-ring__track"></circle>
+          <circle cx="100" cy="100" r="88" class="score-ring__fill"></circle>
+        </svg>
+        <div class="score-ring__center">
+          <span class="score-ring__number">78<small>/100</small></span>
+          <span class="score-ring__label">ENERGY EFFICIENCY<br>SCORE</span>
+        </div>
+      </div>
+
+      <div class="score-metrics">
+        <div class="score-metric">
+          <span class="score-metric__label">CONSUMPTION</span>
+          <span class="score-metric__value score-metric__value--good">GOOD</span>
+        </div>
+        <div class="score-metric">
+          <span class="score-metric__label">WASTAGE</span>
+          <span class="score-metric__value score-metric__value--good">LOW</span>
+        </div>
+        <div class="score-metric">
+          <span class="score-metric__label">OPTIMIZATION</span>
+          <span class="score-metric__value score-metric__value--accent">HIGH</span>
+        </div>
+        <div class="score-metric">
+          <span class="score-metric__label">CO2 IMPACT</span>
+          <span class="score-metric__value score-metric__value--warn">MODERATE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT-IF SIMULATOR ============ -->
+  <section class="section" id="what-if-simulator" aria-labelledby="sim-heading">
+    <div class="section__head">
+      <p class="eyebrow">SIMULATION ENGINE</p>
+      <h2 id="sim-heading" class="section__heading">CHANGE ONE THING.</h2>
+      <p class="section__sub">See the impact before you change your habits.</p>
+    </div>
+
+    <div class="simulator" id="simulator">
+      <div class="simulator__controls">
+        <label class="simulator__field">
+          <span class="simulator__field-label">SELECT APPLIANCE</span>
+          <select class="simulator__select" id="sim-appliance">
+            <option selected>AIR CONDITIONER</option>
+            <option>REFRIGERATOR</option>
+            <option>FAN</option>
+          </select>
+        </label>
+
+        <div class="simulator__pair">
+          <div class="simulator__stat">
+            <span class="simulator__stat-label">CURRENT</span>
+            <span class="simulator__stat-value">6 <small>HOURS / DAY</small></span>
+          </div>
+          <div class="simulator__arrow" aria-hidden="true">6H <span>→</span> 4H</div>
+          <div class="simulator__stat">
+            <span class="simulator__stat-label">TARGET</span>
+            <span class="simulator__stat-value simulator__stat-value--accent">4 <small>HOURS / DAY</small></span>
+          </div>
+        </div>
+
+        <button class="btn btn--primary btn--wide" type="button">RUN SIMULATION <span aria-hidden="true">→</span></button>
+      </div>
+
+      <div class="simulator__results">
+        <div class="simulator__result">
+          <span class="simulator__result-label">CURRENT</span>
+          <span class="simulator__result-value">270 <small>kWh</small></span>
+        </div>
+        <div class="simulator__result">
+          <span class="simulator__result-label">NEW</span>
+          <span class="simulator__result-value">180 <small>kWh</small></span>
+        </div>
+        <div class="simulator__result simulator__result--accent">
+          <span class="simulator__result-label">ENERGY SAVED</span>
+          <span class="simulator__result-value">90 <small>kWh</small></span>
+        </div>
+        <div class="simulator__result simulator__result--accent">
+          <span class="simulator__result-label">MONEY SAVED</span>
+          <span class="simulator__result-value">₹720</span>
+        </div>
+        <div class="simulator__result">
+          <span class="simulator__result-label">CO₂ REDUCED</span>
+          <span class="simulator__result-value">~75 <small>kg</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BILL PREDICTION ============ -->
+  <section class="section" aria-labelledby="bill-heading">
+    <div class="section__head">
+      <p class="eyebrow">PREDICTIVE BILLING</p>
+      <h2 id="bill-heading" class="section__heading">YOUR BILL, BEFORE IT ARRIVES.</h2>
+    </div>
+
+    <div class="bill-panel">
+      <div class="bill-panel__stats">
+        <div class="bill-stat">
+          <span class="bill-stat__label">CURRENT MONTH</span>
+          <span class="bill-stat__value">₹1,842</span>
+        </div>
+        <div class="bill-stat">
+          <span class="bill-stat__label">PREDICTED</span>
+          <span class="bill-stat__value bill-stat__value--accent">₹2,016</span>
+        </div>
+        <div class="bill-stat">
+          <span class="bill-stat__label">TREND</span>
+          <span class="bill-stat__value bill-stat__value--warn">+9.4%</span>
+        </div>
+      </div>
+
+      <div class="bill-chart" id="bill-chart" role="img" aria-label="Bar chart showing projected bill trend rising over six months">
+        <div class="bill-chart__bar" style="--h:42%"><span class="bill-chart__tick">MAR</span></div>
+        <div class="bill-chart__bar" style="--h:51%"><span class="bill-chart__tick">APR</span></div>
+        <div class="bill-chart__bar" style="--h:47%"><span class="bill-chart__tick">MAY</span></div>
+        <div class="bill-chart__bar" style="--h:63%"><span class="bill-chart__tick">JUN</span></div>
+        <div class="bill-chart__bar" style="--h:70%"><span class="bill-chart__tick">JUL</span></div>
+        <div class="bill-chart__bar bill-chart__bar--predicted" style="--h:82%"><span class="bill-chart__tick">AUG</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUSTAINABILITY INDEX ============ -->
+  <section class="section" aria-labelledby="sustain-heading">
+    <div class="section__head">
+      <p class="eyebrow">SUSTAINABILITY INDEX</p>
+      <h2 id="sustain-heading" class="section__heading">YOUR ENERGY FOOTPRINT</h2>
+    </div>
+
+    <div class="sustainability" id="sustainability-index">
+      <div class="sustainability__stats">
+        <div class="sustain-stat">
+          <span class="sustain-stat__label">MONTHLY CO₂</span>
+          <span class="sustain-stat__value">124 <small>kg</small></span>
+        </div>
+        <div class="sustain-stat">
+          <span class="sustain-stat__label">ENERGY SAVED</span>
+          <span class="sustain-stat__value sustain-stat__value--accent">36 <small>kWh</small></span>
+        </div>
+        <div class="sustain-stat">
+          <span class="sustain-stat__label">EFFICIENCY GAIN</span>
+          <span class="sustain-stat__value sustain-stat__value--accent">12%</span>
+        </div>
+      </div>
+
+      <div class="sustain-meter" role="img" aria-label="Sustainability meter at 68 percent">
+        <div class="sustain-meter__track">
+          <div class="sustain-meter__fill" style="width:68%"></div>
+        </div>
+        <div class="sustain-meter__scale">
+          <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADD APPLIANCE ============ -->
+  <section class="section" aria-labelledby="add-heading">
+    <div class="add-panel">
+      <div class="add-panel__intro">
+        <p class="eyebrow">REGISTER A NEW SOURCE</p>
+        <h2 id="add-heading" class="section__heading">ADD AN ENERGY SOURCE</h2>
+        <p class="add-panel__helper">Don't know the wattage? NeuroVolt can estimate typical appliance consumption.</p>
+      </div>
+
+      <form class="add-form" id="add-appliance-form">
+        <div class="add-form__row">
+          <label for="f-appliance">Appliance</label>
+          <input type="text" id="f-appliance" name="appliance" placeholder="e.g. Washing Machine" required>
+        </div>
+        <div class="add-form__row">
+          <label for="f-power">Power Consumption</label>
+          <input type="number" id="f-power" name="power" placeholder="Watts (W)" min="0" required>
+        </div>
+        <div class="add-form__row">
+          <label for="f-qty">Quantity</label>
+          <input type="number" id="f-qty" name="quantity" placeholder="Units" min="1" value="1" required>
+        </div>
+        <div class="add-form__row">
+          <label for="f-hours">Hours / Day</label>
+          <input type="number" id="f-hours" name="hours" placeholder="Hours" min="0" max="24" step="0.5" required>
+        </div>
+        <div class="add-form__row">
+          <label for="f-rate">Electricity Rate</label>
+          <input type="number" id="f-rate" name="rate" placeholder="₹ per kWh" min="0" step="0.1" required>
+        </div>
+
+        <button class="btn btn--primary btn--wide" type="submit">ADD TO NEUROVOLT <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__brand">
+    <span class="footer__logo">⚡ NEUROVOLT</span>
+    <span class="footer__tag">THE INTELLIGENCE LAYER FOR EVERY WATT.</span>
+  </div>
+  <div class="footer__meta">
+    <span>SIH 2026 PROJECT</span>
+    <span class="footer__status"><span class="status-dot status-dot--sm"></span> SYSTEM STATUS: READY</span>
+  </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>
